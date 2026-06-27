@@ -31,7 +31,12 @@ a.btn.dim{background:rgba(251,245,234,.06);color:#D9C39A;font-weight:700;font-si
   <div class="note">رابط ثابت دائم · يحوّلك تلقائياً للخادم الحالي</div>
 </div>
 <script>
-fetch('url.txt?_='+Date.now()).then(r=>r.text()).then(function(u){
+function liveUrl(){
+  return fetch('https://api.github.com/repos/tasklyn/summar/contents/url.txt?_='+Date.now(),{headers:{'Accept':'application/vnd.github.raw'}})
+    .then(function(r){ if(!r.ok) throw 0; return r.text(); })
+    .catch(function(){ return fetch('url.txt?_='+Date.now()).then(function(r){return r.text();}); });
+}
+liveUrl().then(function(u){
   u=(u||'').trim().replace(/\/+$/,'');
   if(!u){ document.getElementById('off').style.display='block'; return; }
   document.getElementById('lApp').href = u+'/';
