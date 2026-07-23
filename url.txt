@@ -1,1 +1,1 @@
-https://written-specialist-bald-issues.trycloudflare.com
+https://api.trycloudflare.com
